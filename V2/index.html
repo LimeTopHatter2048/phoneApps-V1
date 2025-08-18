@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phone OS</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Loading screen -->
+  <div id="loading-screen">
+    <h1>Loading...</h1>
+    <div class="loading-bar">
+      <div class="progress"></div>
+    </div>
+  </div>
+
+  <!-- Main screen -->
+  <div>
+    <div id="screen-container" style="display: none;">
+    </div>
+    <!-- TabBar -->
+    <div id="tab-bar">
+        <button>☰</button>
+        <button>◻️</button>
+        <button>◀️</button>
+        <!-- TabBar.js <-backButton(⬅),homeButton(■), overviewButton(☰) -->
+    </div>
+  </div>
+  
+
+  <script src="main.js" type="module"></script>
+</body>
+</html>

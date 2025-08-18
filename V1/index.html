@@ -3,56 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini OS - Self Driving Car</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <title>Modular Screen App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- LOADING SCREEN -->
-    <div id="loadingScreen">
-        <p>Loading...</p>
+    <!-- Loading screen -->
+    <div id="loading-screen">
+        <h1>Loading...</h1>
     </div>
 
-    <!-- MAIN APP SCREEN -->
-    <div id="mainScreen" style="display: none;">
-        <div id="appGrid">
-            <div class="appBox" onclick="launchApp('car')">
-                <span>🚗 Self-Driving Car</span>
-            </div>
-            <!-- Add more appBoxes here -->
+    <!-- Main screen -->
+    <div id="main-screen" style="display: none;">
+        <div id="main-container">
+        <p>This is the main screen!</p>
         </div>
-
-        <!-- UNIVERSAL BOTTOM BAR -->
-        <div id="bottomBar">
-            <button onclick="goBack()">🔙</button>
-            <button onclick="goHome()">🔲</button>
-            <button onclick="openOverview()">☰</button>
+        <div id="bottom-bar">
+            <button>☰</button>
+            <button>◻️</button>
+            <button>◀️</button>
         </div>
     </div>
 
-    <!-- CANVAS APP AREA -->
-    <div id="appContainer" style="display: none;">
-        <div id="carApp" class="appCanvas" style="display: none;">
-            <div id="carOverlay">
-                <button onclick="startCarApp()">▶️ Play</button>
-                <button onclick="save()">💾 Save</button>
-                <button onclick="discard()">🗑️ Delete Save</button>
-                <button onclick="stopCarApp()">⏹️ Stop</button>
-            </div>
-            <canvas id="carCanvas"></canvas>
-            <canvas id="networkCanvas"></canvas>
-        </div>
-    </div>
-
-    <!-- OVERVIEW MODAL -->
-    <div id="overviewModal" style="display: none;">
-        <div class="overviewApp">
-            <span>🚗 Car App</span>
-            <button onclick="closeApp('car')">❌</button>
-        </div>
-        <!-- more opened apps -->
-    </div>
-
-    <script src="scripts/ui.js"></script>
-    <script src="scripts/main.js"></script>
+    <!-- Scripts -->
+    <script src="main.js" type="module"></script>
 </body>
 </html>

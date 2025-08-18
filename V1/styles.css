@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+#container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #f0f0f0;
+  overflow: hidden;
+}
+
+/* Loading screen overlay */
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.8);
+  color: white;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Hidden class for toggling visibility */
+.hidden {
+  display: none;
+}
+
+/* Hover tab */
+#hover-tab {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: red;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 100;
+}
