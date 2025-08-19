@@ -40,6 +40,8 @@
       padding: 10px;
       background: url('mainBackGround.webp') no-repeat center/cover;
       transition: opacity 0.3s ease;
+      /* ✅ This makes apps sit in the center of their cells */
+      place-items: center;
     }
 
     .main-page.hidden {
@@ -49,20 +51,31 @@
 
     .app {
       display: flex;
+      width: 70%;          
+      height: 70%;
+      border-radius: 20%;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-size: 12px;
-      background: rgba(0,0,0,0.6);
-      color: white;
-      border-radius: 10px;
-      text-align: center;
-      padding: 6px;
       cursor: pointer;
       user-select: none;
     }
-    .app:hover {
-      background: rgba(0,0,0,0.8);
+
+    .app-icon {
+      width: 70%;          /* smaller than the cell */
+      height: 70%;         /* keeps margin around it */
+      border-radius: 20%;  /* makes corners curved */
+      object-fit: cover;   /* makes sure the icon scales nicely */
+      margin-bottom: 4px;
     }
+
+    .app-label {
+      font-size: 12px;
+      color: white;
+      text-align: center;
+      word-break: break-word; /* prevents overflow */
+    }
+
 
     /* Page controls */
     .controls {
@@ -92,12 +105,13 @@
         <!-- Main screen -->
         <div id="main-screen" class="screen">
           <!-- pages will be injected here -->
+          <div class="controls">
+            <button onclick="prevPage()">◀</button>
+            <button onclick="nextPage()">▶</button>
+          </div>
         </div>
       </div>
-    <div class="controls">
-      <button onclick="prevPage()">◀</button>
-      <button onclick="nextPage()">▶</button>
-    </div>
+    
   </div>
 
   <script>
@@ -105,9 +119,9 @@
     const totalPages = 3;
 
     const apps = [
-      { name: 'selfDriveCar', page: 1, x: 4, y: 1 },
-      { name: 'Cal', page: 2, x: 2, y: 2 },
-      { name: 'Notes', page: 3, x: 6, y: 3 }
+      { name: 'selfDriveCar', color:'yellow', icon: 'selfDrivingCar_icon.jpg', page: 1, x: 4, y: 1 },
+      { name: 'Cal', color:'blue', icon:'cal_icon.jpg', page: 2, x: 2, y: 2 },
+      { name: 'Notes', color:'red', icon:'note_icon.png', page: 3, x: 6, y: 3 }
     ];
 
     const phone = document.getElementById('phone');
@@ -128,7 +142,13 @@
       if (page) {
         const div = document.createElement('div');
         div.className = 'app';
-        div.textContent = app.name;
+        div.id = app.name;
+        div.style.background = app.color;
+        // inside app
+        div.innerHTML = `
+          <img src="${app.icon}" alt="${app.name}" class="app-icon">
+          <span class="app-label">${app.name}</span>
+        `;
         div.style.gridColumn = app.x;
         div.style.gridRow = app.y;
         page.appendChild(div);
