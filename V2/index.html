@@ -7,26 +7,28 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Loading screen -->
-  <div id="loading-screen">
-    <h1>Loading...</h1>
-    <div class="loading-bar">
-      <div class="progress"></div>
-    </div>
-  </div>
+  <!-- backGround screen -->
+  <canvas id="canvas1"></canvas>
 
-  <!-- Main screen -->
-  <div>
-    <div id="screen-container" style="display: none;">
+    <div class="phone-container">
+      <div class="screen-container">
+        <!-- Loading screen -->
+        <div id="loading-screen" class="screen loading-screen">
+          <h1>Loading<span class="dots"></span></h1> <!-- 🔹 Added span for animated dots -->
+            <div class="loading-bar">
+              <div class="progress"></div>
+            </div>
+        </div>
+        <!-- Main screen -->
+        <div id="main-screen" class="screen"></div>
+      </div>
+    
+      <div class="hover-tab">
+        <button id="back-button">⬅</button>
+        <button id="home-button">■</button>
+        <button id="task-view-button">☰</button>
+      </div>
     </div>
-    <!-- TabBar -->
-    <div id="tab-bar">
-        <button>☰</button>
-        <button>◻️</button>
-        <button>◀️</button>
-        <!-- TabBar.js <-backButton(⬅),homeButton(■), overviewButton(☰) -->
-    </div>
-  </div>
   
 
   <script src="main.js" type="module"></script>
