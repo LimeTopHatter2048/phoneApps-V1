@@ -100,10 +100,10 @@
   </style>
 </head>
 <body>
-  <div class="phone-container" id="phone">
+  <div class="phone-container">
       <div class="screen-container">
         <!-- Main screen -->
-        <div id="main-screen" class="screen">
+        <div class="screen main-screen">
           <!-- pages will be injected here -->
           <div class="controls">
             <button onclick="prevPage()">◀</button>
@@ -124,7 +124,7 @@
       { name: 'Notes', color:'red', icon:'note_icon.png', page: 3, x: 6, y: 3 }
     ];
 
-    const phone = document.getElementById('phone');
+    const phone = document.querySelector('phone-container');
 
     // Create all pages
     for (let pageIndex = 0; pageIndex < totalPages; pageIndex++) {
