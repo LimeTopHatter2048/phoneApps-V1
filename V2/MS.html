@@ -36,14 +36,15 @@
     }
     /* background image taking up 100% of the viewport. */
     .main-screen {
+      position: relative;        /* allows stacking children (put at top)*/
       width: 100vw;          /* full viewport width, height */
       height: 100vh;
-      background-image: url('your-background.png'); /* replace with your file */
+      background-image: url('mainBackGround.webp'); /* replace with your file */
       background-size: cover;    /* fill space, keep aspect ratio */
       background-position: center;
-      background-repeat: no-repeat;
-      position: relative;        /* allows stacking children */
+      
       overflow: hidden;
+      z-index: 1; /* behind main-page */
     }
 
     /* grid overlay*/
@@ -57,32 +58,35 @@
       display: grid;
       grid-template-columns: repeat(6, 1fr); /* 6 columns */
       grid-template-rows: repeat(4, 1fr); /* 4 rows */
-      gap: 16px; /* space inbetween apps */
-      padding: 20px;
+      gap: 6px; /* space inbetween apps */
+      padding: 10px;
+      place-items: center; /* centers apps inside their cells */
 
+      /* no background, default hidden/can’t be clicked  */
+      background: transparent;
+      opacity: 0;                  
+      pointer-events: none;        
       transition: opacity 0.3s ease;
-      /* ✅ This makes apps sit in the center of their cells */
-      place-items: center;
+      z-index: 2; /* makes sure it’s above .main-screen */
     }
 
-    .main-page.hidden {
-      opacity: 0;
-      pointer-events: none;
+    /* The active page is visible */
+    .main-page.active {
+      opacity: 1;
+      pointer-events: auto;
     }
     /* icons (or app tiles) placed in grid cells */
     .app {
       display: flex;
       width: 70%;          
       height: 70%;
-      border-radius: 20%;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-size: 12px;
-      text-align: center;
+      border-radius: 20%;
       cursor: pointer;
-      backdrop-filter: blur(6px); /* glassy look */
       user-select: none;
+      backdrop-filter: blur(6px); /* glassy look */
     }
 
     .app-icon {
@@ -128,8 +132,6 @@
       <div class="screen-container">
         <!-- Main screen -->
         <div class="screen main-screen">
-          <!-- backGround screen -->
-          <img src="mainBackGround.webp" alt="mainBackGround" class="backGround">
           <!-- pages will be injected here -->
           <!--  -->
         </div>
@@ -151,7 +153,7 @@
       // Create all pages, active
       for (let pageIndex = 0; pageIndex < totalPages; pageIndex++) {
         const pageHTML = `
-          <div class="page main-page${pageIndex + 1}">
+          <div class="main-page page${pageIndex + 1}">
             
           </div>
         `;
@@ -172,7 +174,7 @@
       // Place apps in their correct pages
       apps.forEach(app => {
         //for each app get page, 
-        const page = document.querySelector(`.main-page${app.page}`);
+        const page = document.querySelector(`.page${app.page}`);
         if (page) {
           const div = document.createElement('div');
           div.className = 'app';
@@ -191,25 +193,33 @@
       });
         
       // Function to switch pages
-      function showPage(className) {
-        const pages = document.querySelectorAll(".page");
-        pages.forEach((page, i) => page.classList.toggle("active", i === index));
+      function showPage(index) {
+        const pages = document.querySelectorAll(".main-page");
+        pages.forEach((page, i) => {page.classList.toggle("active", i === index)});
         /* pages.forEach(page => page.classList.remove("active"));
         const nextPage = document.querySelector(className);
         if(nextPage) nextPage.classList.add("active"); */
+
+        /* pages.forEach((page, i) => {
+            if (i === index) {
+                pages.classList.add('active');
+            } else {
+                pages.classList.remove('active');
+            }
+        }); */
       }
       // Start screen click
       main.addEventListener("click", (event) => {
         const clickX = event.clientX;
         const screenWidth = main.clientWidth;
-        const edgeThreshold = 10; // px from the edges
+        const edgeThreshold = 50; // px from the edges
     
         if (clickX <= edgeThreshold) {
-          // Very close to the LEFT edge → previous page
+          // Left edge → previous page
           currentPage = (currentPage - 1 + totalPages) % totalPages;
           showPage(currentPage);
         } else if (clickX >= screenWidth - edgeThreshold) {
-          // Very close to the RIGHT edge → next page
+          // RIGHT edge → next page
           currentPage = (currentPage + 1) % totalPages;
           showPage(currentPage);
         }
@@ -221,5 +231,3 @@
   </script>
 </body>
 </html>
-
-
