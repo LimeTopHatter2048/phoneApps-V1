@@ -26,7 +26,7 @@
       position: relative;
     }
     .screen-container {
-      flex: 1;
+      flex: 1; /* takes up remaining space inside phone-container */
       background: #000;
       display: flex; /* Flex layout */
       flex-direction: column;
@@ -37,12 +37,13 @@
     /* background image taking up 100% of the viewport. */
     .main-screen {
       position: relative;        /* allows stacking children (put at top)*/
-      width: 100vw;          /* full viewport width, height */
-      height: 100vh;
+      width: 100%;               /* fill the screen-container's width */
+      height: 100%;              /* fill the screen-container's height */
+
       background-image: url('mainBackGround.webp'); /* replace with your file */
       background-size: cover;    /* fill space, keep aspect ratio */
       background-position: center;
-      
+      background-repeat: no-repeat;
       overflow: hidden;
       z-index: 1; /* behind main-page */
     }
@@ -54,6 +55,9 @@
       left: 0;
       width: 100%;
       height: 100%;
+      /* 20px space on left & right, over padding doesn’t expand the width */
+      padding: 0 100px;
+      box-sizing: border-box;
 
       display: grid;
       grid-template-columns: repeat(6, 1fr); /* 6 columns */
@@ -78,20 +82,22 @@
     /* icons (or app tiles) placed in grid cells */
     .app {
       display: flex;
-      width: 70%;          
-      height: 70%;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      width: 80%;       /* slightly smaller to leave margin inside the grid cell */
+      height: 80%;      /* keep width and height proportional */
       border-radius: 20%;
       cursor: pointer;
       user-select: none;
       backdrop-filter: blur(6px); /* glassy look */
+      margin: auto;     /* centers the app inside its grid cell */
     }
 
     .app-icon {
-      width: 70%;          /* smaller than the cell */
-      height: 70%;         /* keeps margin around it */
+      width: 60%;          /* smaller than the cell */
+      height: 60%;         /* keeps margin around it */
       border-radius: 20%;  /* makes corners curved */
       object-fit: cover;   /* makes sure the icon scales nicely */
       margin-bottom: 4px;
@@ -140,6 +146,16 @@
   </div>
 
   <script>
+    function loadCalScreen() {
+      alert("Calendar loaded!");
+    }
+    function loadSelfDriveCarScreen() {
+      alert("Self Driving Car loaded!");
+    }
+    function loadNotesScreen() {
+      alert("Notes loaded!");
+    }
+
     //DOMContentLoaded to ensure elements exist
     document.addEventListener("DOMContentLoaded", () => {
       let currentPage = 0;
@@ -166,9 +182,9 @@
       }
       
       const apps = [
-        { name: 'selfDriveCar', color:'yellow', icon:'selfDrivingCar_icon.jpg', page: 1, x: 4, y: 1 },
-        { name: 'Cal', color:'blue', icon:'cal_icon.jpg', page: 2, x: 2, y: 2 },
-        { name: 'Notes', color:'red', icon:'note_icon.png', page: 3, x: 6, y: 3 }
+        { name: 'selfDriveCar', color:'yellow', icon:'selfDrivingCar_icon.jpg', load: loadSelfDriveCarScreen, page: 1, x: 4, y: 1 },
+        { name: 'Cal', color:'blue', icon:'cal_icon.jpg', load: loadCalScreen, page: 2, x: 2, y: 2 },
+        { name: 'Notes', color:'red', icon:'note_icon.png', load: loadNotesScreen, page: 3, x: 6, y: 3 }
       ];
 
       // Place apps in their correct pages
@@ -187,6 +203,14 @@
           `;
           div.style.gridColumn = app.x;
           div.style.gridRow = app.y;
+
+          // Add click event to activate app's load function
+          div.addEventListener('click', () => {
+            if (typeof app.load === 'function') {
+              app.load(); // call name function add ()
+            }
+          });
+
           //appendChild()→ inserts codeBlock HTML (as a string)
           page.appendChild(div);
         }
@@ -224,7 +248,7 @@
           showPage(currentPage);
         }
       });
-        
+      
       // Initialize first page
       showPage(currentPage);
     });
