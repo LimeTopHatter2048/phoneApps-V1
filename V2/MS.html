@@ -40,7 +40,7 @@
       width: 100%;               /* fill the screen-container's width */
       height: 100%;              /* fill the screen-container's height */
 
-      background-image: url('mainBackGround.webp'); /* replace with your file */
+      background-image: url('image/mainBackGround.webp'); /* replace with your file */
       background-size: cover;    /* fill space, keep aspect ratio */
       background-position: center;
       background-repeat: no-repeat;
@@ -181,10 +181,11 @@
         main.insertAdjacentHTML('beforeend', pageHTML);
       }
       
+      // import js functions <<<<<<<<<<<<
       const apps = [
-        { name: 'selfDriveCar', color:'yellow', icon:'selfDrivingCar_icon.jpg', load: loadSelfDriveCarScreen, page: 1, x: 4, y: 1 },
-        { name: 'Cal', color:'blue', icon:'cal_icon.jpg', load: loadCalScreen, page: 2, x: 2, y: 2 },
-        { name: 'Notes', color:'red', icon:'note_icon.png', load: loadNotesScreen, page: 3, x: 6, y: 3 }
+        { name: 'selfDriveCar', color:'yellow', icon:'image/selfDrivingCar_icon.jpg', load: loadSelfDriveCarScreen, page: 1, x: 4, y: 1 },
+        { name: 'Cal', color:'blue', icon:'image/cal_icon.jpg', load: loadCalScreen, page: 2, x: 2, y: 2 },
+        { name: 'Notes', color:'red', icon:'image/note_icon.png', load: loadNotesScreen, page: 3, x: 6, y: 3 }
       ];
 
       // Place apps in their correct pages
