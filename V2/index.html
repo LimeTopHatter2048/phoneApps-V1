@@ -7,30 +7,23 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- backGround screen -->
-  <canvas id="canvas1"></canvas>
-
-    <div class="phone-container">
-      <div class="screen-container">
-        <!-- Loading screen -->
-        <div id="loading-screen" class="screen loading-screen">
-          <h1>Loading<span class="dots"></span></h1> <!-- 🔹 Added span for animated dots -->
-            <div class="loading-bar">
-              <div class="progress"></div>
-            </div>
-        </div>
-        <!-- Main screen -->
-        <div id="main-screen" class="screen"></div>
+  <div class="phone-container">
+    <div class="screen-container">
+      <!-- Show loading screen first -->
+      <div id="loading-screen" class="screen loading-screen">
+        <h1>Loading<span class="dots"></span></h1>
+        <div class="loading-bar"><div class="progress"></div></div>
       </div>
-    
-      <div class="hover-tab">
-        <button id="back-button">⬅</button>
-        <button id="home-button">■</button>
-        <button id="task-view-button">☰</button>
-      </div>
+      <!-- Screens will be injected here -->
+      
     </div>
+    <div class="hover-tab">
+      <button id="back-button">⬅</button>
+      <button id="home-button">■</button>
+      <button id="task-view-button">☰</button>
+    </div>
+  </div>
   
-
   <script src="main.js" type="module"></script>
 </body>
 </html>

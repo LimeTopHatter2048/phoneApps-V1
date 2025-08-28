@@ -1,36 +1,33 @@
-window.addEventListener('load', function() {
-  // Show loading screen first
-  showLoadingScreen();
-  
-  const canvas = document.getElementById('canvas1');
-  const ctx = canvas.getContext('2d');
-  canvas.width = 1280 / 2;
-  canvas.height = 720 / 2;
-  
-  const screenContainer = document.querySelector('.screen-container');
-  const mainScreen = document.getElementById('main-screen');
-  
-  function showScreen(screenId) {
-    document.querySelectorAll(".screen").forEach(screen => {
-    screen.style.display = "none";
-    });
-    document.getElementById(screenId).style.display = "flex";
+//main.js
+import { sceneLoad } from './screenCollection.js';
+//DOMContentLoaded to ensure elements exist
+//Waits for DOMContentLoaded
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector('.screen-container');
+
+  //Handles switching/removing screens
+  function findScreenLoad(className) {
+    //for each diary pull load from match name
+    return sceneLoad.filter(load => load.className === className);
   }
 
-  // After 3 seconds, hide loading and show main
-  setTimeout(() => {
-    showScreen('main-screen');
-  }, 3000);
-});
+  function showScreen(className) {
+    // check if screen is in screen container 
+    let screen = container.querySelector(className);
+    if(!screen){
+      // Build dynamically if not already added
+      const loadPull = findScreenLoad(className);
+      if (loadPull && typeof loadPull.load === "function") {
+        const newScreen = loadPull.load(); // CALL the loader function
+        container.appendChild(newScreen);
+        screen = newScreen;
+      }
+    } 
+    // hide others, show this one
+    container.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    screen.classList.add("active");
+  }
 
-export function getSnakeHTML() {
-  return ` 
-  <div class="main-pages">
-    <!-- Page 1 -->
-    <div class="main-page" data-page="1">
-      <div class="grid-apps"></div>
-    </div>
-  <div>
-  <img id="main_img" src="img/main_phone.png" alt="main-background">
-  `;
-}
+  // Start on password
+  showScreen('.password-screen');
+});
