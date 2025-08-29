@@ -2,6 +2,11 @@
 import { sceneLoad } from './screenCollection.js';
 
 window.addEventListener('load', function(){
+  const loadingScreen = document.getElementById('loading-screen');
+  function hideLoading() {
+    loadingScreen.classList.add('hidden');
+  }
+
   const screenContainer = document.querySelector('.screen-container');
   //Handles switching/removing screens
   function findScreenLoad(className) {
@@ -26,6 +31,8 @@ window.addEventListener('load', function(){
     container.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
     screen.classList.add("active");
   }
+  
   // Start on password
   showScreen('.password-screen');
+  hideLoading();   // ✅ explicitly remove loader once ready
 });

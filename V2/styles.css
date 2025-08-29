@@ -110,10 +110,22 @@ html, body {
   z-index: 1000;
 }
 
-/* loading screen needs white background */
-.loading-screen {
+.loading-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
 }
+.loading-overlay.hidden {
+  display: none;
+}
+
 
 /* Hover tab */
 .hover-tab {

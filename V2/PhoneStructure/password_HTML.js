@@ -1,4 +1,4 @@
-//passwordHTML.js
+//password_HTML.js
 export function getPasswordHTML() {
   return `
     <!-- backGround screen -->

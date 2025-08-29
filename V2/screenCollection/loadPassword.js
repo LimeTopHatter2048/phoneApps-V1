@@ -1,6 +1,6 @@
 // loadpassword.js
 // import { getHTML } from `./${screenName}HTML.js`;
-import { getPasswordHTML } from './PhoneStructure/passwordHTML.js';
+import { getPasswordHTML } from './PhoneStructure/password_HTML.js';
 import { passwordFunctions } from './PhoneStructure/passwordFunctions.js';
 
 export class loadPasswordScreen  {
