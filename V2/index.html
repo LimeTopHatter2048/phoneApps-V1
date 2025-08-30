@@ -1,29 +1,35 @@
+<!--   <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body> -->
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Phone OS</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <div class="phone-container">
-    <div class="screen-container">
-      <!-- Show loading screen first -->
-      <div id="loading-screen" class="loading-overlay">
-        <h1>Loading<span class="dots"></span></h1>
-        <div class="loading-bar"><div class="progress"></div></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phone OS</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+  </head>
+  <body>
+    <div class="phone-container">
+      <div class="screen-container">
+        <!-- Show loading screen first -->
+        <div id="loading-screen" class="loading-overlay">
+          <h1>Loading<span class="dots"></span></h1>
+          <div class="loading-bar"><div class="progress"></div></div>
+        </div>
+        <!-- Screens will be injected here -->
+        
       </div>
-      <!-- Screens will be injected here -->
-      
+      <div class="hover-tab">
+        <button id="back-button">⬅</button>
+        <button id="home-button">■</button>
+        <button id="task-view-button">☰</button>
+      </div>
     </div>
-    <div class="hover-tab">
-      <button id="back-button">⬅</button>
-      <button id="home-button">■</button>
-      <button id="task-view-button">☰</button>
-    </div>
-  </div>
-  
-  <script src="script.js" type="module"></script>
-</body>
+    
+    <script src="script.js" type="module"></script>
+  </body>
 </html>
