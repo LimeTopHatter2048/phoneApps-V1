@@ -54,6 +54,17 @@ html, body {
   top: 0;
   left: 0;
 }
+/* shown screen */
+.screen.active {
+  display: flex; /* default behavior */
+  justify-content: center;
+  align-items: center;
+}
+/* if you want certain screens to use grid */
+.grid-screen.active {
+  display: grid;
+  place-items: center;
+}
 
 .dots::after {
   content: '';
@@ -97,6 +108,8 @@ html, body {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   background: white;     /* changed to white */
   color: black;          /* text visible on white */
   font-size: 2rem;
@@ -104,7 +117,10 @@ html, body {
   flex-direction: column; /* 🔹 makes text and bar stack */
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 999;
+}
+#loading-screen.hidden {
+  display: none;
 }
 
 .loading-overlay {

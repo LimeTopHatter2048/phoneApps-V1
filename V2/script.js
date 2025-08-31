@@ -3,11 +3,15 @@ import { sceneLoad } from './screenCollection.js';
 
 window.addEventListener('load', function(){
   const loadingScreen = document.getElementById('loading-screen');
+  const screenContainer = document.querySelector('.screen-container');
+
   function hideLoading() {
     loadingScreen.classList.add('hidden');
   }
+  function showLoading() {
+    loadingScreen.classList.remove('hidden');
+  }
 
-  const screenContainer = document.querySelector('.screen-container');
   //Handles switching/removing screens
   function findScreenLoad(className) {
     // .find() instead of .filter().
@@ -29,7 +33,14 @@ window.addEventListener('load', function(){
     }
     // hide others, show this one
     screenContainer.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-    screen.classList.add("active");
+    
+    if (screen) {
+      screen.classList.add("active");
+      hideLoading();
+    } else {
+      // no screen active? show loader again
+      showLoading();
+    }
   }
   
   // Start on password
