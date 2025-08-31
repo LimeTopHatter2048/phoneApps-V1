@@ -17,10 +17,10 @@ window.addEventListener('load', function(){
     let screen = screenContainer.querySelector(className);
     if(!screen){
       // If doesn't exist, create & initialize
-      const loadPull = findScreenLoad(className);
-      if (loadPull && typeof loadPull.load === "function") {
-        const object = loadPull.load;
-        const instance  = new object();
+      const loadClass = findScreenLoad(className);
+      if (loadClass && typeof loadClass.load === "function") {
+        const objectClass = loadClass.load;
+        const instance  = new objectClass();
         const newScreen = instance.getHTML();
         
         screenContainer.appendChild(newScreen);
@@ -28,7 +28,7 @@ window.addEventListener('load', function(){
       }
     }
     // hide others, show this one
-    container.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    screenContainer.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
     screen.classList.add("active");
   }
   

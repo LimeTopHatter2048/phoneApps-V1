@@ -20,7 +20,7 @@ export class loadPasswordScreen  {
 
     start() {
         console.log("screen started!");
-        this.passwordFunctions.renderInitialScreen();
+        this.functions.renderInitialScreen();
     }
 }
 

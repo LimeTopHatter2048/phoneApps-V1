@@ -21,9 +21,6 @@ html, body {
   position: relative;
   width: 820px;
   height: 560px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background: white;
   border: 8px solid #111;
   border-radius: 30px;
