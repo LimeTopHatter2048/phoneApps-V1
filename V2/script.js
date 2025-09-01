@@ -29,11 +29,15 @@ window.addEventListener('load', function(){
         
         screenContainer.appendChild(newScreen);
         screen = newScreen;
+
+        if (typeof instance.start === "function") {
+          instance.start();
+        }
       }
     }
     // hide others, show this one
     screenContainer.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-    
+
     if (screen) {
       screen.classList.add("active");
       hideLoading();

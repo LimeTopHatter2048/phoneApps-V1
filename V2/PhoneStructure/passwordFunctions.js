@@ -1,6 +1,6 @@
 // passwordFunctions.js
 export class passwordFunctions {
-  constructor(wrapper) {
+  constructor(wrapper, password="1234", attempts = 3) {
     this.wrapper = wrapper;
     this.startPage = wrapper.querySelector('.passwordStart-page');
     this.boxPage = wrapper.querySelector('.passwordBox-page');
@@ -10,6 +10,9 @@ export class passwordFunctions {
     this.submitBtn = wrapper.querySelector('#submitBtn');
     this.passwordBox = wrapper.querySelector('#passwordBox');
     this.message = wrapper.querySelector('#passwordMessage');
+
+    this.password = password;
+    this.attempts = attempts;
 
     this.addEventListeners();
   }
@@ -21,10 +24,16 @@ export class passwordFunctions {
 
     this.submitBtn.addEventListener('click', () => {
       const input = this.passwordBox.value.trim();
-      if (input === "1234") {
+      if (input === this.password) {
         this.showPage(this.accessPage);
       } else {
-        this.showPage(this.lockoutPage);
+        this.attempts--;
+        if (this.attempts > 0) {
+          this.message.textContent = `❌ Wrong password! ${this.attempts} tries left.`;
+          this.message.style.color = "red";
+        } else {
+          this.showPage(this.lockoutPage);
+        }
       }
     });
   }
@@ -33,8 +42,11 @@ export class passwordFunctions {
     this.showPage(this.startPage);
   }
 
-  showPage(page) {
-    this.wrapper.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    page.classList.add('active');
+  showPage(pageElement) {
+    this.wrapper.querySelectorAll('.page').forEach(p => {p.classList.remove('active');
+    });
+    if(pageElement){
+      pageElement.classList.add('active');
+    }
   }
 }
