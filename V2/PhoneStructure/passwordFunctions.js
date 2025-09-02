@@ -1,4 +1,6 @@
 // passwordFunctions.js
+import { wait } from '../utils.js';
+
 export class passwordFunctions {
   constructor(wrapper, password="1234", attempts = 3) {
     this.wrapper = wrapper;
@@ -26,6 +28,10 @@ export class passwordFunctions {
       const input = this.passwordBox.value.trim();
       if (input === this.password) {
         this.showPage(this.accessPage);
+        wait(3, () => {
+          //alert("3 seconds later!");
+          showScreen('.main-screen');
+        });
       } else {
         this.attempts--;
         if (this.attempts > 0) {

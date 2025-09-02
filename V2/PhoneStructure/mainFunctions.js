@@ -16,7 +16,7 @@ export class mainFunctions {
     this.addEventListeners();
     this.showPage(this.currentPage);
   }
-  CreateMainPages(){
+  createMainPages(){
     for (let pageIndex = 0; pageIndex < this.totalPages; pageIndex++) {
       const pageHTML = `
         <div class="main-page page${pageIndex}" data-page="${pageIndex}">
@@ -37,7 +37,7 @@ export class mainFunctions {
       if (page) {
         const appDiv = document.createElement('div');
         appDiv.className = 'app';
-        appDiv.id = app.name;
+        appDiv.id = app.name.replace(/\s+/g, '-').toLowerCase();
         appDiv.style.background = app.color;
         appDiv.style.gridColumn = app.x;
         appDiv.style.gridRow = app.y;
@@ -65,7 +65,7 @@ export class mainFunctions {
       if (clickX <= edgeThreshold) {
         // Left edge → previous page
         this.currentPage = (this.currentPage - 1 + this.totalPages) % this.totalPages;
-        this.showPage(currentPage);
+        this.showPage(this.currentPage);
       } else if (clickX >= screenWidth - edgeThreshold) {
         // RIGHT edge → next page
         this.currentPage = (this.currentPage + 1) % this.totalPages;

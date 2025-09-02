@@ -1,5 +1,6 @@
 //script.js
 import { sceneLoad } from './screenCollection.js';
+import { timers } from './utils.js';
 
 window.addEventListener('load', function(){
   const loadingScreen = document.getElementById('loading-screen');
@@ -17,7 +18,7 @@ window.addEventListener('load', function(){
     // .find() instead of .filter().
     return sceneLoad.find(load => load.className === className);
   }
-  function showScreen(className) {
+  window.showScreen = function(className) {
     let screen = screenContainer.querySelector(className);
     if(!screen){
       // If doesn't exist, create & initialize
@@ -50,4 +51,26 @@ window.addEventListener('load', function(){
   // Start on password
   showScreen('.password-screen');
   hideLoading();   // ✅ explicitly remove loader once ready
+
+  requestAnimationFrame(frame); // start loop
 });
+
+// ===== Timer + frame loop =====
+let lastTime = 0;
+
+function frame(timeStamp) {
+  const deltaTime = timeStamp - lastTime;
+  lastTime = timeStamp;
+
+  // update timers
+  for (let i = timers.length - 1; i >= 0; i--) {
+    const t = timers[i]; // get diary
+    t.elapsed += deltaTime;
+    if (t.elapsed >= t.duration) {
+      t.action();
+      timers.splice(i, 1); // remove finished
+    }
+  }
+
+  requestAnimationFrame(frame);
+}

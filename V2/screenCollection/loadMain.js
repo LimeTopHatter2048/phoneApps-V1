@@ -7,12 +7,13 @@ import { appLoad } from '../screenCollection.js';
 export class loadMainScreen  {
     constructor() {
         console.log(`main Screen initialized!`);
-        this.wrapper = document.createElement('div');
-        this.wrapper.className = "main-screen screen"; // changed from 'screen'
-        // get html screen
-        this.wrapper.innerHTML = getMainHTML();
+        this.wrapper.innerHTML = `
+            <div class="main-screen screen">
+                ${getMainHTML()}
+            </div>
+        `;
         // add adjustments 
-        this.functions = new MainFunctions(this.wrapper, appLoad);
+        this.functions = new mainFunctions(this.wrapper, appLoad);
     }
 
     getHTML() {
